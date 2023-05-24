@@ -10,6 +10,7 @@ class AttachmentButton extends StatelessWidget {
     super.key,
     this.isLoading = false,
     this.onPressed,
+    this.onUnPressed,
     this.padding = EdgeInsets.zero,
   });
 
@@ -18,6 +19,7 @@ class AttachmentButton extends StatelessWidget {
 
   /// Callback for attachment button tap event.
   final VoidCallback? onPressed;
+  final VoidCallback? onUnPressed;
 
   /// Padding around the button.
   final EdgeInsets padding;
@@ -31,32 +33,33 @@ class AttachmentButton extends StatelessWidget {
               0,
               0,
             ),
-        child: IconButton(
-          constraints: const BoxConstraints(
-            minHeight: 24,
-            minWidth: 24,
-          ),
-          icon: isLoading
-              ? SizedBox(
-                  height: 20,
-                  width: 20,
-                  child: CircularProgressIndicator(
-                    backgroundColor: Colors.transparent,
-                    strokeWidth: 1.5,
-                    valueColor: AlwaysStoppedAnimation<Color>(
-                      InheritedChatTheme.of(context).theme.inputTextColor,
-                    ),
-                  ),
-                )
-              : InheritedChatTheme.of(context).theme.attachmentButtonIcon ??
-                  Icon(Icons.mic,
-                      color:
-                          InheritedChatTheme.of(context).theme.inputTextColor),
-          onPressed: isLoading ? null : onPressed,
+        child: Padding(
           padding: padding,
-          splashRadius: 24,
-          tooltip:
-              InheritedL10n.of(context).l10n.attachmentButtonAccessibilityLabel,
+          child: GestureDetector(
+            onLongPress: isLoading ? null : onPressed,
+            onLongPressUp: isLoading ? null : onUnPressed,
+            child: SizedBox(
+              height: 24,
+              width: 24,
+              child: isLoading
+                  ? SizedBox(
+                      height: 20,
+                      width: 20,
+                      child: CircularProgressIndicator(
+                        backgroundColor: Colors.transparent,
+                        strokeWidth: 1.5,
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                          InheritedChatTheme.of(context).theme.inputTextColor,
+                        ),
+                      ),
+                    )
+                  : InheritedChatTheme.of(context).theme.attachmentButtonIcon ??
+                      Icon(Icons.mic,
+                          color: InheritedChatTheme.of(context)
+                              .theme
+                              .inputTextColor),
+            ),
+          ),
         ),
       );
 }

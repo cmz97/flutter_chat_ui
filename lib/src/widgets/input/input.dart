@@ -19,6 +19,7 @@ class Input extends StatefulWidget {
     super.key,
     this.isAttachmentUploading,
     this.onAttachmentPressed,
+    this.onAttachmentUnPressed,
     required this.onSendPressed,
     this.options = const InputOptions(),
   });
@@ -31,6 +32,7 @@ class Input extends StatefulWidget {
 
   /// See [AttachmentButton.onPressed].
   final VoidCallback? onAttachmentPressed;
+  final VoidCallback? onAttachmentUnPressed;
 
   /// Will be called on [SendButton] tap. Has [types.PartialText] which can
   /// be transformed to [types.TextMessage] and added to the messages list.
@@ -153,6 +155,7 @@ class _InputState extends State<Input> {
                   AttachmentButton(
                     isLoading: widget.isAttachmentUploading ?? false,
                     onPressed: widget.onAttachmentPressed,
+                    onUnPressed: widget.onAttachmentUnPressed,
                     padding: buttonPadding,
                   ),
                 Expanded(

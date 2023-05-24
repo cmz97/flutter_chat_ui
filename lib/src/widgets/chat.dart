@@ -69,6 +69,7 @@ class Chat extends StatefulWidget {
     required this.messages,
     this.nameBuilder,
     this.onAttachmentPressed,
+    this.onAttachmentUnPressed,
     this.onAvatarTap,
     this.onBackgroundTap,
     this.onEndReached,
@@ -222,6 +223,8 @@ class Chat extends StatefulWidget {
 
   /// See [Input.onAttachmentPressed].
   final VoidCallback? onAttachmentPressed;
+
+  final VoidCallback? onAttachmentUnPressed;
 
   /// See [Message.onAvatarTap].
   final void Function(types.User)? onAvatarTap;
@@ -624,6 +627,7 @@ class ChatState extends State<Chat> {
                             isAttachmentUploading: widget.isAttachmentUploading,
                             onAttachmentPressed: widget.onAttachmentPressed,
                             onSendPressed: widget.onSendPressed,
+                            onAttachmentUnPressed: widget.onAttachmentUnPressed,
                             options: widget.inputOptions,
                           ),
                     ],
