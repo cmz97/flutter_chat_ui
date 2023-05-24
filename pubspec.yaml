@@ -25,6 +25,9 @@ dependencies:
   url_launcher: ^6.1.11
   visibility_detector: ^0.4.0+2
 
+dependency_overrides:
+  meta: ^1.1.8
+  
 dev_dependencies:
   dart_code_metrics: ^5.7.3
   flutter_lints: ^2.0.1
